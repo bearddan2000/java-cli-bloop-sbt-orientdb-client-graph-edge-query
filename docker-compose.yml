@@ -1,0 +1,23 @@
+version: '3'
+services:
+  java-srv:
+    build:
+      context: java-srv
+    ports:
+      - "80:8080"
+    depends_on:
+      - db
+    links:
+      - "db:db"
+
+  db:
+    image: orientdb
+    ports:
+      - 2424:2424
+      - 2480:2480
+#    volumes:
+#      - ./db/config:/orientdb/config
+#      - ./db/databases:/orientdb/databases
+#      - ./db/backup:/orientdb/backup
+    environment:
+      ORIENTDB_ROOT_PASSWORD: "rootpwd"
